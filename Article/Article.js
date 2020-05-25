@@ -85,6 +85,26 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: "Piper's Cooking tastes so yummy!",
+    date: "May 13th, 2020",
+    firstParagraph: `She likes to make a lot of asian food. She made Pad Se Eau the other day and it was so so so delicious.
+          she also makes very good guacamole and mexican cuisine. All of her dellcious creations go very well together with wine.`,
+    secondParagraph: `Desserts: She also likes to make desserts. Cheese cake, ice cream sundays, Nutella sammiches, smores, danishes, are just some
+          of the many delicious treats she makes. I want her to make those rolled up ice cream thingies so bad.`,
+    thirdParagraph: `List of things Piper needs in the kitchen: rolling pin, silverware, bowls, utensils, spatulas, food processor,
+          new pizza pan, more space, kitchen island cart.`            
+  },
+  {
+    title: "Piper's Plants",
+    date: "May 14th, 2020",
+    firstParagraph: `My succulents do not need much care to grow full and green. I give them a good drink about once a month and they do great!
+          I did just recently get an additional aloe plant in my collection from my amazing bf.`,
+    secondParagraph: `The blueberry bush is looking good. We will have to see if it produces any blueberries for us this year. We pruned it a few months ago,
+          however it still has a lot of leaves on it. Hopefully we will see the blueberries this year! If not there is always next year.`,
+    thirdParagraph: `The Lilac bush is definitely not showing any of its flowers this year. I think it is just too young of a plant. However, it is very tall,
+          it has a lot of big beautiful leaves on it, and next year it will look great!`
   }
 ];
 
@@ -112,3 +132,43 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+const stories = document.querySelector(".articles");
+
+data.forEach((item) => {
+  stories.appendChild(createStory(item.title, item.date, item.firstParagraph, item.secondParagraph, item.thirdParagraph))
+});
+
+function createStory (title, date, firstParagraph, secondParagraph, thirdParagraph) {
+  const story = document.createElement("div");
+  const headLine = document.createElement("h2");
+  const storyDate = document.createElement("p");
+  const par1 = document.createElement("p");
+  const par2 = document.createElement("p");
+  const par3 = document.createElement("p");
+  const btn = document.createElement("span");
+
+  story.appendChild(headLine);
+  story.appendChild(storyDate);
+  story.appendChild(par1);
+  story.appendChild(par2);
+  story.appendChild(par3);
+  story.appendChild(btn);
+
+story.classList.add("article");
+storyDate.classList.add("date");
+btn.classList.add("expandButton");
+
+headLine.textContent = title;
+storyDate.textContent = date;
+par1.textContent = firstParagraph;
+par2.textContent = secondParagraph;
+par3.textContent = thirdParagraph;
+btn.textContent = "More";
+
+btn.addEventListener("click", (event) => {
+  story.classList.toggle("article-open"); //must use article-open because the appropriate div has this class name.
+});
+
+return story;
+}
